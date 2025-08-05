@@ -1,0 +1,211 @@
+import React, { useState } from "react";
+import { BrowserRouter, Link } from "react-router-dom";
+
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Modal from "./components/Modal";
+import Alert from "@mui/material/Alert";
+import Hamburger from "hamburger-react";
+import * as Popover from "@radix-ui/react-popover";
+
+import { products } from "./products";
+
+import RoutesApp from "./RoutesApp";
+
+import "./App.css";
+
+function App() {
+  const [cartShop, setCartShop] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [error, setError] = useState(false);
+  const [prod, setProd] = useState(null);
+  const [prods, setProds] = useState(products);
+  const [isOpenHamb, setOpenHamb] = useState(false);
+  const [name, setName] = useState("");
+
+  const countCart = cartShop.reduce((acc, item) => acc + item.count, 0);
+
+  function addItem(item, numSize) {
+    if (numSize !== "") {
+      const nArray = [...cartShop];
+      const nIndex = nArray.findIndex(
+        (product) => product.id === item.id && product.size === numSize
+      );
+      if (nIndex >= 0) {
+        nArray[nIndex].price += nArray[nIndex].price / nArray[nIndex].count;
+        nArray[nIndex].count += 1;
+        setCartShop(nArray);
+      } else {
+        setCartShop([
+          ...nArray,
+          {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            size: numSize,
+            image: item.image,
+            count: 1,
+          },
+        ]);
+      }
+    }
+  }
+
+  function removeItem(item, numSize) {
+    const nArray = [...cartShop];
+    const nIndex = nArray.findIndex(
+      (product) => product.id === item.id && product.size === numSize
+    );
+    if (nIndex >= 0) {
+      nArray[nIndex].price -= nArray[nIndex].price / nArray[nIndex].count;
+      nArray[nIndex].count -= 1;
+      if (nArray[nIndex].count === 0) {
+        nArray.splice(nIndex, 1);
+      }
+      setCartShop(nArray);
+    }
+  }
+
+  const showAlert = (numSize) => {
+    if (numSize !== "") {
+      setOpen(true);
+      setTimeout(() => setOpen(false), 3000);
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 3000);
+    }
+  };
+
+  const handleClickOpen = (item) => {
+    setOpen1(true);
+    setProd(item);
+  };
+
+  const handleClose = () => {
+    setOpen1(false);
+  };
+
+  function searchFilter(valueSearch) {
+    setProds(
+      products.filter((prod) =>
+        prod.name.toLowerCase().includes(valueSearch.toLowerCase())
+      )
+    );
+    setName(valueSearch);
+  }
+
+  return (
+    <div className="App">
+      <NavBar
+        cartShop={cartShop}
+        quantidade={countCart}
+        removeItem={removeItem}
+        addItem={addItem}
+        searchFilter={searchFilter}
+      />
+
+      <BrowserRouter>
+        <div className="filter">
+          <Link className="filterLink" to="/">
+            Home
+          </Link>
+          <Link className="filterLink" to="/todos">
+            Todos os produtos
+          </Link>
+          <Link className="filterLink" to="/body-cropped">
+            Body / Cropped
+          </Link>
+          <Link className="filterLink" to="/calças-saias">
+            Calças / Saias
+          </Link>
+          <Link className="filterLink" to="/vestidos">
+            Vestidos
+          </Link>
+          <Link className="filterLink" to="/moda-infantil">
+            Moda Infantil
+          </Link>
+          <Link className="filterLink" to="/novidades">
+            Novidades
+          </Link>
+          <Link className="filterLink" to="/promocoes">
+            Promoções
+          </Link>
+        </div>
+
+        <Popover.Root>
+          <Popover.Trigger className="hamburguer">
+            <Hamburger toggled={isOpenHamb} toggle={setOpenHamb} color="#fff" />
+          </Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Content className="PopoverContent">
+              <Popover.Close className="filterClose" aria-label="Close">
+                <h3 className="filterTitle">Categorias</h3>
+                <div className="filter1">
+                  <Link to="/" className="filterEsc">
+                    ● Home
+                  </Link>
+                  <Link to="/todos" className="filterEsc">
+                    ● Todos os produtos
+                  </Link>
+                  <Link to="/body-cropped" className="filterEsc">
+                    ● Body / Cropped
+                  </Link>
+                  <Link to="/calças-saias" className="filterEsc">
+                    ● Calças / Saias
+                  </Link>
+                  <Link to="/vestidos" className="filterEsc">
+                    ● Vestidos
+                  </Link>
+                  <Link to="/moda-infantil" className="filterEsc">
+                    ● Moda Infantil
+                  </Link>
+                  <Link to="/novidades" className="filterEsc">
+                    ● Novidades
+                  </Link>
+                  <Link to="/promocoes" className="filterEsc">
+                    ● Promoções
+                  </Link>
+                </div>
+              </Popover.Close>
+              <Popover.Arrow className="PopoverArrow" />
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+
+        <RoutesApp
+          addItem={addItem}
+          showAlert={showAlert}
+          handleClickOpen={handleClickOpen}
+          prods={prods}
+          name={name}
+        />
+
+        {error && (
+          <Alert className="alertAdd" variant="filled" severity="error">
+            Informe um tamanho
+          </Alert>
+        )}
+        {open && (
+          <Alert className="alertAdd" variant="filled" severity="success">
+            Produto adicionado no carrinho
+          </Alert>
+        )}
+
+        <Footer />
+
+        {open1 && (
+          <Modal
+            item={prod}
+            open={open1}
+            handleClose={handleClose}
+            addItem={addItem}
+            showAlert={showAlert}
+          />
+        )}
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;

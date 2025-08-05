@@ -109,21 +109,24 @@ const NavBar = ({
                         rel="noopener noreferrer"
                         href={`https://api.whatsapp.com/send?phone=5528999697930&text=${encodeURIComponent(
                           `✨ *GamaModas* ✨
-                          Oii,  
-                          Gostei desses itens e tenho interesse em comprar:` +
+
+Oii,
+Gostei desses itens e tenho interesse em comprar:` +
                             cartShop
-                              .map(
-                                (item) =>
-                                  `
-                          *Item:* ${item.name}
-                          *Tamanho:* ${item.size}
-                          *Quantidade:* ${item.count}
-                          *Valor:* ${item.price.toLocaleString("pt-br", {
-                            style: "currency",
-                            currency: "BRL",
-                          })}
-                          *Foto:* https://seudominio.com/${item.image[0]}`
-                              )
+                              .map((item) => {
+                                const { name, price, size, count, image } =
+                                  item;
+                                return `
+
+*Item:* ${name}
+*Tamanho:* ${size}
+*Quantidade:* ${count}
+*Valor:* ${price.toLocaleString("pt-br", {
+                                  style: "currency",
+                                  currency: "BRL",
+                                })}
+*Foto:* https://gama-modas.vercel.app/${image[0]}`;
+                              })
                               .join("\n")
                         )}`}
                         className="btnBuy"

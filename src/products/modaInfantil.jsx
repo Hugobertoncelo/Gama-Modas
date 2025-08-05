@@ -18,7 +18,7 @@ const modaInfantil = [
     quant: 7,
     size: ["P", "M", "G"],
     categories: ["modaInfantil"],
-    image: ["media/roupas/vestidoInfantilFloral.jpg"],
+    image: ["media/roupas/vestido1.webp"],
     description: "Vestido floral leve para crianças, perfeito para festas.",
     descSize: "Tamanhos P, M e G disponíveis.",
   },

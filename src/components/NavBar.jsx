@@ -16,11 +16,41 @@ const NavBar = ({
   removeItem,
   addItem,
   searchFilter,
+  clearCart, // nova prop para limpar carrinho
 }) => {
   const [search, setSearch] = useState("");
-  const totalPrice = cartShop.reduce((acc, item) => {
-    return acc + item.price;
-  }, 0);
+
+  const totalPrice = cartShop.reduce(
+    (acc, item) => acc + item.price * item.count,
+    0
+  );
+
+  const handleFinishPurchase = () => {
+    const message =
+      `✨ *GamaModas* ✨\n\n` +
+      `Oii,\nGostei desses itens e tenho interesse em comprar:` +
+      cartShop
+        .map((item) => {
+          const { name, price, size, count, image } = item;
+          return `\n\n*Item:* ${name}\n*Tamanho:* ${size}\n*Quantidade:* ${count}\n*Valor:* ${price.toLocaleString(
+            "pt-br",
+            {
+              style: "currency",
+              currency: "BRL",
+            }
+          )}\n*Foto:* https://gama-modas.vercel.app/${image[0]}`;
+        })
+        .join("\n");
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://api.whatsapp.com/send?phone=5528999697930&text=${encodedMessage}`;
+
+    // Abre o link do WhatsApp
+    window.open(whatsappURL, "_blank");
+
+    // Limpa o carrinho após clicar
+    clearCart();
+  };
 
   return (
     <header className="NavBar">
@@ -104,35 +134,9 @@ const NavBar = ({
                           currency: "BRL",
                         })}
                       </p>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={`https://api.whatsapp.com/send?phone=5528999697930&text=${encodeURIComponent(
-                          `✨ *GamaModas* ✨
-
-Oii,
-Gostei desses itens e tenho interesse em comprar:` +
-                            cartShop
-                              .map((item) => {
-                                const { name, price, size, count, image } =
-                                  item;
-                                return `
-
-*Item:* ${name}
-*Tamanho:* ${size}
-*Quantidade:* ${count}
-*Valor:* ${price.toLocaleString("pt-br", {
-                                  style: "currency",
-                                  currency: "BRL",
-                                })}
-*Foto:* https://gama-modas.vercel.app/${image[0]}`;
-                              })
-                              .join("\n")
-                        )}`}
-                        className="btnBuy"
-                      >
+                      <button onClick={handleFinishPurchase} className="btnBuy">
                         Finalizar Compra
-                      </a>
+                      </button>
                     </div>
                   )}
                 </div>

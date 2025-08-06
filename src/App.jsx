@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
@@ -14,7 +14,15 @@ import RoutesApp from "./RoutesApp";
 import "./App.css";
 
 function App() {
-  const [cartShop, setCartShop] = useState([]);
+  const [cartShop, setCartShop] = useState(() => {
+    const saved = localStorage.getItem("cartShop");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cartShop", JSON.stringify(cartShop));
+  }, [cartShop]);
+
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const [error, setError] = useState(false);
@@ -66,6 +74,11 @@ function App() {
     }
   }
 
+  function clearCart() {
+    setCartShop([]);
+    localStorage.removeItem("cartShop");
+  }
+
   const showAlert = (numSize) => {
     if (numSize !== "") {
       setOpen(true);
@@ -102,6 +115,7 @@ function App() {
         removeItem={removeItem}
         addItem={addItem}
         searchFilter={searchFilter}
+        clearCart={clearCart} // ✅ Nova prop para limpar o carrinho
       />
 
       {/* Menu Fixo para Desktop */}

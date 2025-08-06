@@ -71,6 +71,25 @@ html body {
     border: 2px solid #ff33a7;
     border-radius: 0.75rem;
     padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #ff33a7 #ffebf5;
+  }
+
+  .PopoverContent::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .PopoverContent::-webkit-scrollbar-track {
+    background: #ffebf5;
+    border-radius: 8px;
+  }
+
+  .PopoverContent::-webkit-scrollbar-thumb {
+    background-color: #ff33a7;
+    border-radius: 8px;
   }
 
   .filterTitle {
@@ -87,7 +106,7 @@ html body {
 
   .filter1 {
     border-radius: 0.5rem;
-    padding: 1.5rem;
+    padding: 1rem;
     transition: 1s;
     text-decoration: none;
     background-color: #ffffff;

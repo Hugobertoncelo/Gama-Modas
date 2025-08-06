@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Importando o Link
 import Slide from "../components/Slide";
 
 function Home() {
@@ -35,7 +36,7 @@ function Home() {
           Aproveite descontos exclusivos e ofertas especiais por tempo limitado.
           Não perca!
         </p>
-        <a href="/promocoes" style={{ textDecoration: "none" }}>
+        <Link to="/promocoes" style={{ textDecoration: "none" }}>
           <button
             style={{
               marginTop: "1rem",
@@ -56,7 +57,7 @@ function Home() {
           >
             Ver Promoções
           </button>
-        </a>
+        </Link>
       </section>
 
       <h2 style={{ fontWeight: "700", color: "#333" }}>

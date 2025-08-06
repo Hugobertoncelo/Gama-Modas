@@ -69,7 +69,7 @@
   overflow-y: auto;
   max-height: 80vh;
   width: 22rem;
-  background: white;
+  background: #fff0f5;
   box-shadow: 1px 1px 10px 1px #ff99c8;
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);

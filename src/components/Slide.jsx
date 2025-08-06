@@ -37,8 +37,8 @@ const Slide = () => {
   };
 
   const imgSlides = [
-    { name: "novidades", img: "/media/slide/Slide1.jpeg" },
-    { name: "promocoes", img: "/media/slide/Slide2.jpg" },
+    { name: "novidades", img: "/media/slide/slide1.jpeg" },
+    { name: "promocoes", img: "/media/slide/slide2.jpg" },
   ];
 
   const infos = [

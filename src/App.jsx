@@ -74,6 +74,15 @@ function App() {
     }
   }
 
+  // Remove todas as unidades do item selecionado
+  function removeAllUnits(item, numSize) {
+    setCartShop((prevCart) =>
+      prevCart.filter(
+        (product) => !(product.id === item.id && product.size === numSize)
+      )
+    );
+  }
+
   function clearCart() {
     setCartShop([]);
     localStorage.removeItem("cartShop");
@@ -114,8 +123,9 @@ function App() {
         quantidade={countCart}
         removeItem={removeItem}
         addItem={addItem}
+        removeAllUnits={removeAllUnits}
         searchFilter={searchFilter}
-        clearCart={clearCart} // ✅ Nova prop para limpar o carrinho
+        clearCart={clearCart}
       />
 
       {/* Menu Fixo para Desktop */}

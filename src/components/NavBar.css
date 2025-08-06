@@ -174,22 +174,26 @@
   border: none;
 }
 
+/* ALTERAÇÃO para deixar a lixeira mais visível e alinhada */
 .iconsBtn {
-  width: 2rem;
-  height: 5rem;
-  position: absolute;
-  display: flexbox;
-  margin: 0 0 0 70%;
+  width: auto;
+  height: auto;
+  position: static;
+  display: flex;
+  gap: 0.4rem;
+  margin-left: 0.5rem;
+  align-items: center;
 }
 
 .iconItem {
   cursor: pointer;
   transition: 0.2s;
-  margin: 0.3rem 0;
+  margin: 0;
+  color: #ff99c8;
 }
 
 .iconItem:hover {
-  color: #ff99c8;
+  color: #ff66aa;
 }
 
 .cartVazio {

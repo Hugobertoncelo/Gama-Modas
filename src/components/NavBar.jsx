@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import { MdShoppingCart } from "react-icons/md";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import * as Popover from "@radix-ui/react-popover";
 
@@ -15,8 +15,9 @@ const NavBar = ({
   quantidade: countCart,
   removeItem,
   addItem,
+  removeAllUnits, // Recebe a função para apagar tudo de uma vez
   searchFilter,
-  clearCart, // nova prop para limpar carrinho
+  clearCart,
 }) => {
   const [search, setSearch] = useState("");
 
@@ -119,6 +120,17 @@ const NavBar = ({
                               </button>
                               <button onClick={() => removeItem(item, size)}>
                                 <AiOutlineMinusCircle
+                                  className="iconItem"
+                                  size={20}
+                                />
+                              </button>
+                              {/* Botão da lixeira com estilo igual aos outros */}
+                              <button
+                                onClick={() => removeAllUnits(item, size)}
+                                aria-label="Remover item inteiro"
+                                className="btnTrash"
+                              >
+                                <AiOutlineDelete
                                   className="iconItem"
                                   size={20}
                                 />

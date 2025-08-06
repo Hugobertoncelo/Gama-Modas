@@ -6,7 +6,10 @@ const promocoes = [
     quant: 5,
     size: ["P", "M", "G"],
     categories: ["promocoes"],
-    image: ["media/roupas/vestidoFloralAzul.jpg"],
+    image: [
+      "media/roupas/vestido2.jpg",
+      "media/roupas/vestido-longo-azul.webp",
+    ],
     description:
       "🌸 Vestido leve com estampa floral, ideal para dias quentes. Tecido 100% algodão.",
     descSize:
@@ -19,7 +22,7 @@ const promocoes = [
     quant: 3,
     size: ["M", "G"],
     categories: ["promocoes"],
-    image: ["media/roupas/blusaTricoBege.jpg"],
+    image: ["media/roupas/trico.jpg", "media/roupas/trico2.jpg"],
     description:
       "🧶 Blusa confortável em tricô macio, perfeita para o inverno.",
     descSize:
@@ -32,7 +35,7 @@ const promocoes = [
     quant: 2,
     size: ["P", "M", "G"],
     categories: ["promocoes"],
-    image: ["media/roupas/jaquetaJeansVintage.jpg"],
+    image: ["media/roupas/jaqueta.jpg", "media/roupas/jaqueta2.png"],
     description:
       "👖 Jaqueta jeans estilo vintage com lavagem clara e detalhes desgastados.",
     descSize:
@@ -45,7 +48,7 @@ const promocoes = [
     quant: 4,
     size: ["P", "M"],
     categories: ["promocoes"],
-    image: ["media/roupas/shortsPretoBasico.jpg"],
+    image: ["media/roupas/short.jpeg", "media/roupas/short2.webp"],
     description:
       "🩳 Shorts básico preto com elástico na cintura, super confortável para o dia a dia.",
     descSize:

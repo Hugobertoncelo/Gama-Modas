@@ -1,5 +1,5 @@
 import React from "react";
-import Slide from "./components/Slide";
+import Slide from "../components/Slide";
 
 function Home() {
   return (
@@ -7,7 +7,6 @@ function Home() {
       style={{ maxWidth: "700px", margin: "2rem auto", textAlign: "center" }}
     >
       <Slide />
-
       <img
         src="/media/home/banner.jpg"
         alt="Banner Home"
@@ -63,11 +62,9 @@ function Home() {
       <h2 style={{ fontWeight: "700", color: "#333" }}>
         Bem-vindo à nossa loja!
       </h2>
-
       <p style={{ fontSize: "1.3rem", color: "#555", marginBottom: "1rem" }}>
         Encontre o estilo que revela sua personalidade.
       </p>
-
       <p
         style={{
           fontSize: "1rem",
@@ -79,7 +76,6 @@ function Home() {
         Roupas com design exclusivo, conforto e qualidade para você arrasar em
         qualquer ocasião.
       </p>
-
       <p style={{ fontSize: "1.1rem", fontWeight: "600", color: "#222" }}>
         Confira nossas novidades e promoções imperdíveis — sua próxima peça
         favorita está aqui!

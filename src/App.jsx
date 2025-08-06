@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -9,7 +9,6 @@ import Hamburger from "hamburger-react";
 import * as Popover from "@radix-ui/react-popover";
 
 import { products } from "./products";
-
 import RoutesApp from "./RoutesApp";
 
 import "./App.css";
@@ -105,105 +104,139 @@ function App() {
         searchFilter={searchFilter}
       />
 
-      <BrowserRouter>
-        <div className="filter">
-          <Link className="filterLink" to="/">
-            Home
-          </Link>
-          <Link className="filterLink" to="/todos">
-            Todos os produtos
-          </Link>
-          <Link className="filterLink" to="/body-cropped">
-            Body / Cropped
-          </Link>
-          <Link className="filterLink" to="/calças-saias">
-            Calças / Saias
-          </Link>
-          <Link className="filterLink" to="/vestidos">
-            Vestidos
-          </Link>
-          <Link className="filterLink" to="/moda-infantil">
-            Moda Infantil
-          </Link>
-          <Link className="filterLink" to="/novidades">
-            Novidades
-          </Link>
-          <Link className="filterLink" to="/promocoes">
-            Promoções
-          </Link>
-        </div>
+      {/* Menu Fixo para Desktop */}
+      <div className="filter">
+        <Link className="filterLink" to="/">
+          Home
+        </Link>
+        <Link className="filterLink" to="/todos">
+          Todos os produtos
+        </Link>
+        <Link className="filterLink" to="/body-cropped">
+          Body / Cropped
+        </Link>
+        <Link className="filterLink" to="/calças-saias">
+          Calças / Saias
+        </Link>
+        <Link className="filterLink" to="/vestidos">
+          Vestidos
+        </Link>
+        <Link className="filterLink" to="/moda-infantil">
+          Moda Infantil
+        </Link>
+        <Link className="filterLink" to="/novidades">
+          Novidades
+        </Link>
+        <Link className="filterLink" to="/promocoes">
+          Promoções
+        </Link>
+      </div>
 
-        <Popover.Root>
-          <Popover.Trigger className="hamburguer">
-            <Hamburger toggled={isOpenHamb} toggle={setOpenHamb} color="#fff" />
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Content className="PopoverContent">
-              <Popover.Close className="filterClose" aria-label="Close">
-                <h3 className="filterTitle">Categorias</h3>
-                <div className="filter1">
-                  <Link to="/" className="filterEsc">
-                    ● Home
-                  </Link>
-                  <Link to="/todos" className="filterEsc">
-                    ● Todos os produtos
-                  </Link>
-                  <Link to="/body-cropped" className="filterEsc">
-                    ● Body / Cropped
-                  </Link>
-                  <Link to="/calças-saias" className="filterEsc">
-                    ● Calças / Saias
-                  </Link>
-                  <Link to="/vestidos" className="filterEsc">
-                    ● Vestidos
-                  </Link>
-                  <Link to="/moda-infantil" className="filterEsc">
-                    ● Moda Infantil
-                  </Link>
-                  <Link to="/novidades" className="filterEsc">
-                    ● Novidades
-                  </Link>
-                  <Link to="/promocoes" className="filterEsc">
-                    ● Promoções
-                  </Link>
-                </div>
-              </Popover.Close>
-              <Popover.Arrow className="PopoverArrow" />
-            </Popover.Content>
-          </Popover.Portal>
-        </Popover.Root>
+      {/* Menu Hamburguer Mobile */}
+      <Popover.Root open={isOpenHamb} onOpenChange={setOpenHamb}>
+        <Popover.Trigger className="hamburguer">
+          <Hamburger toggled={isOpenHamb} toggle={setOpenHamb} color="#fff" />
+        </Popover.Trigger>
+        <Popover.Portal>
+          <Popover.Content className="PopoverContent">
+            <Popover.Close className="filterClose" aria-label="Close">
+              <h3 className="filterTitle">Categorias</h3>
+              <div className="filter1">
+                <Link
+                  to="/"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Home
+                </Link>
+                <Link
+                  to="/todos"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Todos os produtos
+                </Link>
+                <Link
+                  to="/body-cropped"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Body / Cropped
+                </Link>
+                <Link
+                  to="/calças-saias"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Calças / Saias
+                </Link>
+                <Link
+                  to="/vestidos"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Vestidos
+                </Link>
+                <Link
+                  to="/moda-infantil"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Moda Infantil
+                </Link>
+                <Link
+                  to="/novidades"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Novidades
+                </Link>
+                <Link
+                  to="/promocoes"
+                  className="filterEsc"
+                  onClick={() => setOpenHamb(false)}
+                >
+                  ● Promoções
+                </Link>
+              </div>
+            </Popover.Close>
+            <Popover.Arrow className="PopoverArrow" />
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover.Root>
 
-        <RoutesApp
+      {/* Rotas e Produtos */}
+      <RoutesApp
+        addItem={addItem}
+        showAlert={showAlert}
+        handleClickOpen={handleClickOpen}
+        prods={prods}
+        name={name}
+      />
+
+      {/* Alertas */}
+      {error && (
+        <Alert className="alertAdd" variant="filled" severity="error">
+          Informe um tamanho
+        </Alert>
+      )}
+      {open && (
+        <Alert className="alertAdd" variant="filled" severity="success">
+          Produto adicionado no carrinho
+        </Alert>
+      )}
+
+      <Footer />
+
+      {open1 && (
+        <Modal
+          item={prod}
+          open={open1}
+          handleClose={handleClose}
           addItem={addItem}
           showAlert={showAlert}
-          handleClickOpen={handleClickOpen}
-          prods={prods}
-          name={name}
         />
-
-        {error && (
-          <Alert className="alertAdd" variant="filled" severity="error">
-            Informe um tamanho
-          </Alert>
-        )}
-        {open && (
-          <Alert className="alertAdd" variant="filled" severity="success">
-            Produto adicionado no carrinho
-          </Alert>
-        )}
-
-        <Footer />
-
-        {open1 && (
-          <Modal
-            item={prod}
-            open={open1}
-            handleClose={handleClose}
-            addItem={addItem}
-            showAlert={showAlert}
-          />
-        )}
-      </BrowserRouter>
+      )}
     </div>
   );
 }

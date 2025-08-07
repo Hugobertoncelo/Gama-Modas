@@ -4,7 +4,7 @@ import { BsInstagram, BsWhatsapp } from "react-icons/bs";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaGithub, FaLinkedin, FaGlobe } from "react-icons/fa";
 
-import logo from "/media/logo1.png";
+import logo from "/media/logo1.jpeg";
 
 const Footer = () => {
   return (

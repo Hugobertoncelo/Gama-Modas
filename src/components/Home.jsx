@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Importando o Link
+import { Link } from "react-router-dom";
 import Slide from "../components/Slide";
 
 function Home() {

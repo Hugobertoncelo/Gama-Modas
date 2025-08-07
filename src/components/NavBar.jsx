@@ -4,7 +4,7 @@ import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import * as Popover from "@radix-ui/react-popover";
 
-import logo from "/media/logo1.png";
+import logo from "/media/logo1.jpeg";
 
 import "./NavBar.css";
 
@@ -15,7 +15,7 @@ const NavBar = ({
   quantidade: countCart,
   removeItem,
   addItem,
-  removeAllUnits, // Recebe a função para apagar tudo de uma vez
+  removeAllUnits,
   searchFilter,
   clearCart,
 }) => {

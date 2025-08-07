@@ -1,7 +1,7 @@
 .NavBar {
   width: 100%;
   height: 15vh;
-  background-color: #fff;
+  background-color: #f8f8f8f8;
   color: #000000;
   display: flex;
   justify-content: space-between;
@@ -236,21 +236,29 @@
     display: flex;
     justify-content: space-around;
   }
+
   .logo {
-    width: 8rem;
+    width: 240px;
+    height: 100%;
+    object-fit: cover;
   }
+
   .nav-ul {
     padding-right: 0rem;
   }
+
   .navProdutos {
     display: none;
   }
+
   .navSearch {
     display: none;
   }
+
   .cartContent {
     width: 90vw;
   }
+
   .cartContent {
     width: 92vw;
   }
